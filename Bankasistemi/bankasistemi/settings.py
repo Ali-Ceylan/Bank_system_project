@@ -50,9 +50,9 @@ EMAIL_PORT = 587  # üretim modunda bu seçeneği kullanın
 EMAIL_USE_TLS = True # bu seçeneği debug modu aktifken kullanın
 EMAIL_USE_SSL = False  # üretim modunda bu seçeneği kullanın
 #EMAIL_USE_SSL = False # bu seçeneği debug modu aktifken kullanın
-EMAIL_HOST_USER ="diyetisyendiyet180@gmail.com"
-EMAIL_HOST_PASSWORD ="dioshjlsbaqbsypn"
-EMAIL_ADMIN = "diyetisyendiyet180@gmail.com"
+EMAIL_HOST_USER ="your email"
+EMAIL_HOST_PASSWORD ="EMAIL_HOST_PASSWORD"
+EMAIL_ADMIN = "your email"
 DEFAULT_FROM_EMAIL = "MY APP"
 
 MIDDLEWARE = [
