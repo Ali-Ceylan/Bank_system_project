@@ -1,0 +1,117 @@
+<style>
+    .btn-light{
+        background-color: #842029;
+        font-weight: 400;
+        margin-left: 12px;
+    }
+    .btn-light:hover{
+        background-color: #FFFFFF;
+        color: #842029;
+        font-weight: 400;
+    }
+    .nav-link{
+        color: #FFFFFF;
+    }
+    .soldan-margin{
+        margin-left: 100px;
+    }
+</style>
+<nav class="navbar navbar-dark bg-danger navbar-expand-lg">
+    <div class="container mb-1 mt-1">
+        <a class="navbar-brand" href="{% url 'anasayfa' %}"><i class="bi bi-bank"></i> ALİ BANKA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 soldan-margin">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'anasayfa' %}"><i class="bi bi-house"></i>Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'hesaplar' %}">Hesaplar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'hesapgecmisi' %}">Hesap Geçmişi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'kullanıcılar' %}">Kullanıcılar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'piyasalar' %}">Piyasalar</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Hoş Geldin, Yönetici {{ user.first_name|title }} {{ user.last_name|title }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Çıkış</a>
+                    </li>
+                </ul>
+                {% else %}
+                {% if not request.user.hesaplar.exists %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 soldan-margin">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'anasayfa' %}"><i class="bi bi-house"></i>Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'hesapac' %}">Hesap Aç</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'piyasalar' %}">Piyasalar</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Hoş Geldin, {{ user.first_name|title }} {{ user.last_name|title }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Çıkış</a>
+                    </li>
+                </ul>
+                    {% else %}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 soldan-margin">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'anasayfa' %}"><i class="bi bi-house"></i>Ana Sayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'hesaplar' %}">Hesaplar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'hesapgecmisi' %}">Hesap Geçmişi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'piyasalar' %}">Piyasalar</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Hoş Geldin,  {{ user.first_name|title }} {{ user.last_name|title }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-light" href="{% url 'logout' %}" role="button"><i class="bi bi-box-arrow-right"></i> Çıkış</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 soldan-margin">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'anasayfa' %}"><i class="bi bi-house"></i>Ana Sayfa</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light" href="{% url 'register' %}" role="button"><i class="bi bi-person"></i> Kayıt Ol</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light" href="{% url 'login' %}" role="button"><i class="bi bi-box-arrow-in-right"></i> Giriş Yap</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-image: url('{% static "banka2.webp" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .table th {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        .table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        .form-container h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 100px;
+        }
+        footer a {
+            color: #dc3545;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    {% include '_navbar.html' %}
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="5" class="text-center">
+                                <h1>Hesap Hareketleriniz</h1>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>GÖNDEREN</th>
+                            <th>ALICI</th>
+                            <th>MİKTAR</th>
+                            <th>İŞLEM TİPİ</th>
+                            <th>TARİH VE SAAT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for Islem in islemler %}
+                            <tr>
+                                <td>{{ Islem.gonderen }}</td>
+                                <td>{{ Islem.alici }}</td>
+                                <td>{{ Islem.miktar }}</td>
+                                <td>{{ Islem.islem_tipi }}</td>
+                                <td>{{ Islem.tarih_ve_saat }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center">Kayıtlı bir işlem bulunamadı.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+                <h2>Para Gönder</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <tbody>
+                    <form method="post" action="{% url 'paragonder' %}">
+                        {% csrf_token %}
+                       <tr><td>{{ form.as_p }}</td></tr> 
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger mt-3">Gönder</button>
+                        </div>
+                    </form>
+                </tbody>
+                {% else %}
+                    <p class="text-center">Para göndermek için lütfen <a href="{% url 'login' %}" class="text-danger">giriş yapın</a>.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Ali Bank. Tüm hakları saklıdır. | <a href="#">Gizlilik Politikası</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

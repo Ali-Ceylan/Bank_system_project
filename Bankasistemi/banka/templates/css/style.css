@@ -1,0 +1,192 @@
+
+body {
+    background-image: url('{% static "banka2.webp" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.hero-section .btn {
+    margin-top: 20px;
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    background-color: #c82333;
+}
+
+.services-section {
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.services-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3rem;
+}
+
+.service-card {
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.service-card i {
+    font-size: 3.5rem;
+    color: #dc3545;
+    margin-bottom: 25px;
+}
+
+
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer a {
+    color: #dc3545;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+
+.account-card {
+    margin: auto;
+    height: auto; /* Adjusted for content */
+    width: 100%; /* Full width */
+    max-width: 700px; /* Max width for larger screens */
+    margin-bottom: 50px;
+    background-color: white;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+
+}
+.account-card a{
+    font-size: 1.1rem;
+}
+.account-card h5 {
+    margin-bottom: 15px;
+}
+.btn-custom {
+    color: white;
+    border-radius: 8px;
+    background-color: #dc3545;
+    text-align: center;
+    padding: 12px 25px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-custom:hover {
+    background-color: #c82333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 0px;
+    border-radius: 15px;
+    height: auto;
+    margin-bottom: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* for the border radius */
+    
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    color: #000;
+
+}
+
+th, td {
+    background-color: white;
+    color: #000;
+}
+th {
+        background-color: #f8f9fa;
+}
+.increase {
+    color: green;
+}
+.decrease {
+    color: red;
+}
+.list-group-item{
+    border-radius: 15px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+}
+    @media (max-width: 768px) {
+        .hero-section h1 {
+        font-size: 2.5rem;
+        }
+    .account-card {
+            flex-direction: column;
+            align-items: stretch;
+    }
+        .account-card a {
+            margin-top: 10px;
+        }
+    }

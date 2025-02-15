@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"
+          href="{% static 'style.css' %}">
+    <title>Döviz ve Borsa Takip</title>
+
+    <style>
+        
+body {
+    background-image: url('{% static "banka2.webp" %}');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.hero-section .btn {
+    margin-top: 20px;
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    background-color: #c82333;
+}
+
+.services-section {
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.services-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3rem;
+}
+
+.service-card {
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.service-card i {
+    font-size: 3.5rem;
+    color: #dc3545;
+    margin-bottom: 25px;
+}
+
+
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer a {
+    color: #dc3545;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+
+.account-card {
+    margin: auto;
+    height: auto; /* Adjusted for content */
+    width: 100%; /* Full width */
+    max-width: 700px; /* Max width for larger screens */
+    margin-bottom: 50px;
+    background-color: white;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+
+}
+.account-card a{
+    font-size: 1.1rem;
+}
+.account-card h5 {
+    margin-bottom: 15px;
+}
+.btn-custom {
+    color: white;
+    border-radius: 8px;
+    background-color: #dc3545;
+    text-align: center;
+    padding: 12px 25px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-custom:hover {
+    background-color: #c82333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 0px;
+    border-radius: 15px;
+    height: auto;
+    margin-bottom: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* for the border radius */
+    
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    color: #000;
+
+}
+
+th, td {
+    background-color: white;
+    color: #000;
+}
+th {
+        background-color: #f8f9fa;
+}
+.increase {
+    color: green;
+}
+.decrease {
+    color: red;
+}
+.list-group-item{
+    border-radius: 15px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+}
+    @media (max-width: 768px) {
+        .hero-section h1 {
+        font-size: 2.5rem;
+        }
+    .account-card {
+            flex-direction: column;
+            align-items: stretch;
+    }
+        .account-card a {
+            margin-top: 10px;
+        }
+    }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .increase {
+            color: green;
+        }
+        .decrease {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {% include '_navbar.html' %}
+  <div class="container mt-5">
+
+    <div class="col-md-8">
+        <table id="currencyTable">
+             <thead>
+               <tr>
+                   <th colspan="3" style="text-align: center;">
+                       <h1>Piyasalar</h1>
+                   </th>
+               </tr>
+               <tr>
+                   <th>Para Birimi</th>
+                   <th>Değer</th>
+                   <th>Günlük Değişim (%)</th>
+               </tr>
+             </thead>
+             <tbody>
+               {% for data in currency_data %}
+                  <tr id="row-{{ data.currency_type }}">
+                      <td>{{ data.currency_type }}</td>
+                      <td id="value-{{ data.currency_type }}" data-start-value="{{ data.value }}" data-prev-value="{{ data.value }}">{{ data.value }}</td>
+                     <td id="change-{{ data.currency_type }}"></td>
+                  </tr>
+                 {% endfor %}
+              </tbody>
+         </table>
+  </div>
+    
+<script>
+    function updateData() {
+        fetch('/get_currency_data/')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const valueElement = document.getElementById('value-' + item.currency_type);
+                    const timeElement = document.getElementById('time-' + item.currency_type);
+                    const changeElement = document.getElementById('change-' + item.currency_type);
+                   
+                    if (valueElement) {
+                        const startValue = parseFloat(valueElement.getAttribute('data-start-value'));
+                        const prevValue = parseFloat(valueElement.getAttribute('data-prev-value'));
+                        const newValue = parseFloat(item.value);
+                         
+                         valueElement.textContent = item.value;
+                         valueElement.setAttribute('data-prev-value', newValue);
+                         
+                        const changePercentage = ((newValue - startValue) / startValue) * 100;
+                        changeElement.textContent = changePercentage.toFixed(2) + '%';
+                           
+                         if (newValue > prevValue) {
+                            valueElement.classList.remove('decrease');
+                            valueElement.classList.add('increase');
+                            changeElement.classList.remove('decrease');
+                            changeElement.classList.add('increase');
+
+                            } else if (newValue < prevValue) {
+                                 valueElement.classList.remove('increase');
+                                 valueElement.classList.add('decrease');
+                                 changeElement.classList.remove('increase');
+                                 changeElement.classList.add('decrease');
+                         }
+                           else{
+                                valueElement.classList.remove('increase','decrease')
+                                 changeElement.classList.remove('increase','decrease');
+                            }
+                    }
+                    if (timeElement) timeElement.textContent = item.timestamp;
+                });
+            });
+    }
+
+    setInterval(updateData, 2000);
+    updateData();
+</script>
+</body>
+</html>

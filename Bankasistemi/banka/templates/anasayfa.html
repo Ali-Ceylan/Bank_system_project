@@ -1,0 +1,525 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title>Banka Ana Sayfa</title>
+    <style>
+        body {
+            background-image: url('{% static "banka2.webp" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .hero-section .btn {
+            margin-top: 20px;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-section .btn:hover {
+            background-color: #c82333;
+        }
+
+        .services-section {
+            padding: 50px 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #000;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .services-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 3rem;
+        }
+
+        .service-card {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+
+        .service-card i {
+            font-size: 3.5rem;
+            color: #dc3545;
+            margin-bottom: 25px;
+        }
+
+
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #dc3545;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+
+        .account-card {
+            margin: auto;
+            height: auto; /* Adjusted for content */
+            width: 100%; /* Full width */
+            max-width: 700px; /* Max width for larger screens */
+            margin-bottom: 50px;
+            background-color: white;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between; /* Align items horizontally */
+            align-items: center; /* Center items vertically */
+
+        }
+        .account-card a{
+          font-size: 1.1rem;
+        }
+        .account-card h5 {
+          margin-bottom: 15px;
+        }
+        .btn-custom {
+            color: white;
+            border-radius: 8px;
+            background-color: #dc3545;
+            text-align: center;
+            padding: 12px 25px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+          .btn-custom:hover {
+            background-color: #c82333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 0px;
+            border-radius: 15px;
+            height: auto;
+            margin-bottom: 20px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden; /* for the border radius */
+            
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            color: #000;
+
+        }
+
+        th, td {
+            background-color: white;
+            color: #000;
+        }
+        th {
+             background-color: #f8f9fa;
+        }
+        .increase {
+            color: green;
+        }
+        .decrease {
+            color: red;
+        }
+        .list-group-item{
+          border-radius: 15px;
+          box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+          margin-bottom: 15px;
+        }
+          @media (max-width: 768px) {
+              .hero-section h1 {
+                font-size: 2.5rem;
+             }
+            .account-card {
+                  flex-direction: column;
+                  align-items: stretch;
+                  margin:auto;
+            }
+             .account-card a {
+                  margin-top: 10px;
+              }
+            }
+            
+    </style>
+</head>
+<body>
+{% include '_navbar.html' %}
+
+<!-- Ana İçerik -->
+<div class="container mt-5">
+    {% if not user.is_authenticated %}
+        <div class="hero-section">
+            <h1>Banka Adı ile Güvenli Finans</h1>
+            <p>Hesaplarınızı yönetin, finansal özgürlüğe bir adım daha yaklaşın.</p>
+            <a href="{% url 'register' %}" class="btn btn-danger">Hesap Açmak için kayıt ol</a>
+            <a href="#" class="btn btn-outline-light">Daha Fazla Bilgi</a>
+        </div>
+    {% elif user.is_authenticated and not request.user.hesaplar.exists %}
+        <div class="hero-section">
+            <h1>Banka Adı ile Güvenli Finans</h1>
+            <p>Hesaplarınızı yönetin, finansal özgürlüğe bir adım daha yaklaşın.</p>
+            <a href="{% url 'hesapac' %}" class="btn btn-danger">Hesap Aç</a>
+            <a href="#" class="btn btn-outline-light">Daha Fazla Bilgi</a>
+        </div>
+    {% else %}
+       <div class="" style="margin-left: 260px;">
+        <div class="col-9 justify-content-center" style="display: flex; justify-content: center; align-items: center; height:400px; margin-bottom: 30px; ">
+            <div id="carouselExampleAutoplaying" class="carousel slide" style="height:370px;border-radius:20px;" data-bs-ride="carousel">
+                <div class="carousel-inner" style="height:auto; width: 700px; border-radius:8px;">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    {% if hesaplar %}
+                    <ul class="list-group mb-5">
+                       {% for hesap in hesaplar|dictsort:"iban"|slice:":1" %}
+                       <fieldset> 
+                         <table>
+                           <tr>
+                             <th colspan="3" style="text-align: center;">
+                                 <h1>Hesap</h1>
+                             </th>
+                         </tr>
+                         <tbody><tr>
+                         <td><strong>İsim: </strong></td><td>{{ user.first_name|title }} {{ user.last_name|title }}</td><td><br>
+                         </td></tr>
+                         <tr>
+                         <td><strong>TC: </strong></td><td> {{ hesap.musteri }}</td><td><br>
+                         </td></tr>
+                         <tr>
+                         <td><strong>IBAN:</strong> </td><td><span id="iban-{{ forloop.counter }}">{{ hesap.iban }}</span>
+                           <button onclick="copyIBAN('iban-{{ forloop.counter }}')" class="btn btn-outline-secondary btn-sm">
+                             <i class="bi bi-clipboard"></i> Kopyala
+                           </button></td><td><br>
+                           </td>
+                         </tr>
+                         <tr>
+                           <td><strong>Hesap Türü:</strong> </td><td>{{ hesap.get_hesap_turu_display }}</td><td><br>
+                           </td></tr>
+                           <tr>
+                           <td><strong>Bakiye:</strong> </td><td>{{ hesap.bakiye }} TL</td><td><br>
+                           </td></tr>
+                         </tbody></table>
+                         </fieldset>
+                         
+                       {% endfor %}
+                    
+                    </ul>
+                   {% endif %}
+                    
+                </div>
+               
+                <div class="carousel-item" data-bs-interval="10000">
+                    {% if hesaplar %}
+                    <ul class="list-group mb-5">
+                       {% for hesap in hesaplar|dictsort:"iban"|slice:"1:2" %}
+                       <fieldset> 
+                         <table>
+                           <tr>
+                             <th colspan="3" style="text-align: center;">
+                                 <h1>Hesap</h1>
+                             </th>
+                         </tr>
+                         <tbody><tr>
+                         <td><strong>İsim: </strong></td><td>{{ user.first_name|title }} {{ user.last_name|title }}</td><td><br>
+                         </td></tr>
+                         <tr>
+                         <td><strong>TC: </strong></td><td> {{ hesap.musteri }}</td><td><br>
+                         </td></tr>
+                         <tr>
+                         <td><strong>IBAN:</strong> </td><td><span id="iban-{{ forloop.counter }}">{{ hesap.iban }}</span>
+                           <button onclick="copyIBAN('iban-{{ forloop.counter }}')" class="btn btn-outline-secondary btn-sm">
+                             <i class="bi bi-clipboard"></i> Kopyala
+                           </button></td><td><br>
+                           </td>
+                         </tr>
+                         <tr>
+                           <td><strong>Hesap Türü:</strong> </td><td>{{ hesap.get_hesap_turu_display }}</td><td><br>
+                           </td></tr>
+                           <tr>
+                           <td><strong>Bakiye:</strong> </td><td>{{ hesap.bakiye }} TL</td><td><br>
+                           </td></tr>
+                         </tbody></table>
+                         </fieldset>
+                         
+                       {% endfor %}
+                    
+                    </ul>
+                   {% endif %}
+                    
+                </div>
+                <div class="carousel-item" data-bs-interval="1000">
+                    {% if hesaplar %}
+                    <ul class="list-group mb-5">
+                       {% for hesap in hesaplar|dictsort:"iban"|slice:"2:3" %}
+                       <fieldset> 
+                         <table>
+                           <tr>
+                             <th colspan="3" style="text-align: center;">
+                                 <h1>Hesap</h1>
+                             </th>
+                         </tr>
+                         <tbody><tr>
+                         <td><strong>İsim: </strong></td><td>{{ user.first_name|title }} {{ user.last_name|title }}</td><td><br>
+                         </td></tr>
+                         <tr>
+                         <td><strong>TC: </strong></td><td> {{ hesap.musteri }}</td><td><br>
+                         </td></tr>
+                         <tr>
+                         <td><strong>IBAN:</strong> </td><td><span id="iban-{{ forloop.counter }}">{{ hesap.iban }}</span>
+                           <button onclick="copyIBAN('iban-{{ forloop.counter }}')" class="btn btn-outline-secondary btn-sm">
+                             <i class="bi bi-clipboard"></i> Kopyala
+                           </button></td><td><br>
+                           </td>
+                         </tr>
+                         <tr>
+                           <td><strong>Hesap Türü:</strong> </td><td>{{ hesap.get_hesap_turu_display }}</td><td><br>
+                           </td></tr>
+                           <tr>
+                           <td><strong>Bakiye:</strong> </td><td>{{ hesap.bakiye }} TL</td><td><br>
+                           </td></tr>
+                         </tbody></table>
+                         </fieldset>
+                         
+                       {% endfor %}
+                    
+                    </ul>
+                   {% endif %}
+                    
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+                <style>
+                    .carousel-control-prev,
+                    .carousel-control-next {
+                        background: transparent; /* Arka planı saydam yapar */
+                        border: none;          /* Kenarlıkları kaldırır */
+                        opacity: 0.5;          /* İlk saydamlık seviyesi */
+                        transition: opacity 0.3s ease; /* Geçiş efekti için */
+                    }
+                
+                    .carousel-control-prev:hover,
+                    .carousel-control-next:hover {
+                      opacity: 1;   /* Fare üstüne gelince saydamlığı azaltır */
+                      background: rgba(0, 0, 0, 0.1);
+                    }
+                
+                    .carousel-control-prev-icon,
+                    .carousel-control-next-icon {
+                      filter: invert(1); /* İkonları beyaz yapar (isteğe bağlı) */
+                    }
+                </style>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        </div>
+         
+         </div>
+         <div class="account-card">
+           
+            <a href="{% url 'paragonder' %}" class="btn btn-custom">Para Gönder</a>
+             <a href="{% url 'hesapgecmisi' %}" class="btn btn-custom">Hesap Geçmişi</a>
+        </div>
+         <div class="col-md-4">
+               <table id="currencyTable">
+                    <thead>
+                      <tr>
+                          <th colspan="3" style="text-align: center;">
+                              <h1>Piyasalar</h1>
+                          </th>
+                      </tr>
+                      <tr>
+                          <th>Para Birimi</th>
+                          <th>Değer</th>
+                          <th>Günlük Değişim (%)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for data in currency_data|slice:":5" %}
+                         <tr id="row-{{ data.currency_type }}">
+                             <td>{{ data.currency_type }}</td>
+                             <td id="value-{{ data.currency_type }}" data-start-value="{{ data.value }}" data-prev-value="{{ data.value }}">{{ data.value }}</td>
+                            <td id="change-{{ data.currency_type }}"></td>
+                         </tr>
+                        {% endfor %}
+                     </tbody>
+                </table>
+         </div>
+       </div>
+
+
+        
+    {% endif %}
+
+</div>
+
+<!-- Hizmetler -->
+<div class="services-section">
+    <div class="container">
+        <h2>Hizmetlerimiz</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="service-card">
+                    <i class="bi bi-bank"></i>
+                    <h5>Hesap Yönetimi</h5>
+                    <p>Vadeli ve vadesiz hesaplarınızı kolayca yönetin.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-card">
+                    <i class="bi bi-currency-exchange"></i>
+                    <h5>Döviz İşlemleri</h5>
+                    <p>Anında döviz alış ve satış işlemleri yapın.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-card">
+                    <i class="bi bi-credit-card"></i>
+                    <h5>Kredi ve Kart Hizmetleri</h5>
+                    <p>Size özel kredi ve kart tekliflerini keşfedin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 Ali Bank. Tüm hakları saklıdır. | <a href="#">Gizlilik Politikası</a></p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+<script>
+    function copyIBAN(elementId) {
+        const ibanText = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(ibanText).then(() => {
+            alert("IBAN kopyalandı: " + ibanText);
+        }).catch(err => {
+            alert("Kopyalama başarısız oldu: " + err);
+        });
+    }
+</script>
+<script>
+    function updateData() {
+        fetch('/get_currency_data/')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const valueElement = document.getElementById('value-' + item.currency_type);
+                    const timeElement = document.getElementById('time-' + item.currency_type);
+                    const changeElement = document.getElementById('change-' + item.currency_type);
+
+                    if (valueElement) {
+                        const startValue = parseFloat(valueElement.getAttribute('data-start-value'));
+                        const prevValue = parseFloat(valueElement.getAttribute('data-prev-value'));
+                        const newValue = parseFloat(item.value);
+
+                         valueElement.textContent = item.value;
+                         valueElement.setAttribute('data-prev-value', newValue);
+
+
+                        const changePercentage = ((newValue - startValue) / startValue) * 100;
+                        changeElement.textContent = changePercentage.toFixed(2) + '%';
+
+                         if (newValue > prevValue) {
+                            valueElement.classList.remove('decrease');
+                            valueElement.classList.add('increase');
+                            changeElement.classList.remove('decrease');
+                            changeElement.classList.add('increase');
+
+                            } else if (newValue < prevValue) {
+                                 valueElement.classList.remove('increase');
+                                 valueElement.classList.add('decrease');
+                                 changeElement.classList.remove('increase');
+                                 changeElement.classList.add('decrease');
+                         }
+                            else{
+                                valueElement.classList.remove('increase','decrease')
+                                 changeElement.classList.remove('increase','decrease');
+                            }
+                    }
+                    if (timeElement) timeElement.textContent = item.timestamp;
+                });
+            });
+    }
+
+    setInterval(updateData, 2000);
+    updateData();
+</script>
+</body>
+</html>

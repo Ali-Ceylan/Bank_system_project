@@ -1,0 +1,159 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  <title>Kayıt Ol</title>
+  <style>
+  .formduzen {
+    border: 1px solid #DEE2E6;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9); /* Şeffaf beyaz arka plan */
+    padding: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #dc3545;
+  }
+
+  h3 {
+    color: #343a40;
+  }
+  body {
+    background-image: url('{% static "banka2.webp" %}');
+    background-repeat: no-repeat;
+    background-size: contain; /* Resim sayfayı tamamen kaplasın */
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Formu dikey olarak ortalar */
+    justify-content: center; /* Formu yatay olarak ortalar */
+  }
+  </style>
+</head>
+
+<body>
+  
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-4 formduzen">
+        <h3 class="mb-4 mt-4">Yeni Hesap Oluştur</h3>
+        <form method="POST" novalidate>
+          {% csrf_token %}
+          {% if error %}
+            <div class="alert alert-danger">
+              {{ error }}
+            </div>
+          {% endif %}
+          <div class="row justify-content-center">
+            <div class="col-12 mb-4">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="usernameInput" placeholder="Kullanıcı Adı" name="username" required>
+                <label for="usernameInput">Kullanıcı Adı TC</label>
+                <div class="invalid-feedback" id="usernameFeedback">
+                  Lütfen bir Kullanıcı adı giriniz.
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="firstnameInput" placeholder="Ad" name="firstname" required>
+                <label for="firstnameInput">Ad</label>
+                <div class="invalid-feedback" id="firstnameFeedback">
+                  Lütfen bu alanı doldurunuz.
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="lastnameInput" placeholder="Soyad" name="lastname" required>
+                <label for="lastnameInput">Soyad</label>
+                <div class="invalid-feedback" id="lastnameFeedback">
+                  Lütfen bu alanı doldurunuz.
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-4">
+              <div class="form-floating">
+                <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" name="email" required>
+                <label for="emailInput">E-Posta</label>
+                <div class="invalid-feedback">
+                  Lütfen geçerli bir e-posta adresi giriniz.
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="form-floating">
+                <input type="password" class="form-control" id="password" placeholder="Şifre" name="password" required>
+                <label for="password">Şifre</label>
+                <div class="invalid-feedback">
+                  Lütfen bu alanı doldurunuz.
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="form-floating">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Şifre Tekrar" name="repassword" required>
+                <label for="confirmPassword">Şifre Tekrar</label>
+                <div class="invalid-feedback" id="confirmPasswordFeedback">
+                  Lütfen bu alanı doldurunuz.
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-2">
+              <button class="btn btn-danger w-100" type="submit">Kayıt Ol</button>
+            </div>
+            <div class="col-12 mb-4">
+              <p class="d-inline-block text-dark-3 mb-0">Zaten hesabın var mı?</p>
+              <a href="{% url 'login' %}">Giriş Yap</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+            
+  <script>
+    const form = document.querySelector("form");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const confirmPasswordFeedback = document.getElementById("confirmPasswordFeedback");
+  
+    function validatePassword() {
+      if (passwordInput.value === confirmPasswordInput.value) {
+        confirmPasswordInput.setCustomValidity("");
+        confirmPasswordFeedback.textContent = "";
+      } else {
+        confirmPasswordInput.setCustomValidity("Şifreler uyuşmuyor.");
+        confirmPasswordFeedback.textContent = "Şifreler uyuşmuyor.";
+      }
+    }
+  
+    passwordInput.addEventListener("input", validatePassword);
+    confirmPasswordInput.addEventListener("input", validatePassword);
+  
+    form.addEventListener("submit", (e) => {
+      form.classList.add("was-validated");
+  
+      if (!form.checkValidity()) {
+        e.preventDefault();
+      }
+    }, false);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+  integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+</body>
+</html>
